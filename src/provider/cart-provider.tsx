@@ -39,7 +39,7 @@ export default function CartContextProvider({ children }: { children: React.Reac
         if (status !== "loading") {
             handleCart()
         }
-    }, [status, session])
+    }, [status])
 
     return (
         <cartContext.Provider value={{ noOfCartItems, handleCart, isLoading }}>

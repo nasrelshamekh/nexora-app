@@ -38,7 +38,7 @@ export default function CartContextProvider({ children }: { children: React.Reac
         if (status !== "loading") {
             handleWishlist()
         }
-    }, [status, session])
+    }, [status])
 
     return (
         <wishlistContext.Provider value={{ count, handleWishlist, isLoadingWishlist }}>
