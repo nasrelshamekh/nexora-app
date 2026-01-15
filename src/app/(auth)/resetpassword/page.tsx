@@ -22,7 +22,7 @@ export default function ResetPassword() {
     const [showPassword, setShowPassword] = useState(false)
     const router = useRouter()
     const searchParams = useSearchParams()
-    const email = searchParams.get("email") || "" // getting email from query string
+    const email = searchParams.get("email") || ""
 
     const form = useForm<resetPasswordFormType>({
         resolver: zodResolver(resetPasswordSchema),
