@@ -12,8 +12,10 @@ import { toast } from "sonner"
 import { forgotPassword } from "@/actions/password.action"
 import { forgotPasswordSchema, forgotPasswordFormType } from '@/schema/forgot-password.schema'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function ForgotPassword() {
+  const router = useRouter()
   const form = useForm<forgotPasswordFormType>({
     resolver: zodResolver(forgotPasswordSchema),
     mode: "onTouched",
@@ -27,6 +29,7 @@ export default function ForgotPassword() {
       
       toast.success(data?.message, { position: "top-center" })
       form.reset()
+      router.push(`/verifycode?email=${encodeURIComponent(values.email)}`)
     } catch (error) {
       toast.error((error as Error)?.message || "Failed to send reset email", { position: "top-center" })
     }
@@ -46,7 +49,7 @@ export default function ForgotPassword() {
           <div className="text-center">
             <CardTitle className="text-2xl md:text-3xl">Forgot Password</CardTitle>
             <CardDescription className="mt-2">
-              Enter your email and we’ll send you a code to reset your password
+              Enter your email and we&apos;ll send you a code to reset your password
             </CardDescription>
           </div>
         </CardHeader>
@@ -68,7 +71,7 @@ export default function ForgotPassword() {
                 )}
               />
 
-              <Button type="submit" className="w-full" size="lg">
+              <Button type="submit" className="w-full cursor-pointer" size="lg">
                 {form.formState.isSubmitting ? <Spinner /> : "Send Reset Code"}
               </Button>
             </form>

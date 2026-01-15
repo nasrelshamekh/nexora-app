@@ -1,7 +1,7 @@
 "use server"
 import { getUserToken } from "@/lib/auth"
 
-export async function forgotPassword( userEmail: string) {
+export async function forgotPassword(userEmail: string) {
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/auth/forgotPasswords`, {
         method: "POST",
@@ -11,7 +11,7 @@ export async function forgotPassword( userEmail: string) {
         }
     })
     const data = await response.json()
-    
+
     return data
 }
 
@@ -34,6 +34,30 @@ export async function changePassword(currentPassword: string, newPassword: strin
         })
     })
 
+    const data = await response.json()
+    return data
+}
+
+export async function verifyResetCode(resetCode: string) {
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/auth/verifyResetCode`, {
+        method: "POST",
+        body: JSON.stringify({ resetCode: resetCode }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const data = await response.json()
+
+    return data
+}
+
+export async function resetPassword(email: string, newPassword: string) {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/auth/resetPassword`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, newPassword }),
+    })
     const data = await response.json()
     return data
 }

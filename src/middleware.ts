@@ -5,7 +5,7 @@ export async function middleware(request: NextRequest) {
     const token = await getToken({ req: request })
     const { pathname } = request.nextUrl
 
-    const authPages = pathname == "/login" || pathname == "/register" || pathname == "/forgotpassword"
+    const authPages = pathname == "/login" || pathname == "/register" || pathname == "/forgotpassword" || "/verifycode" || "/resetpassword"
     const loggedInPages = pathname == "/allorders" || pathname == "/changepassword"
 
     if (token && authPages) {
@@ -23,5 +23,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/cart", "/brands", "/categories", "/login", "/register", "/allorders", "/changepassword", "/forgotpassword"]
+    matcher: ["/cart", "/brands", "/categories", "/login", "/register", "/allorders", "/changepassword", "/forgotpassword", "/verifycode", "/resetpassword"]
 }
