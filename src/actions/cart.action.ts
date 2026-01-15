@@ -88,7 +88,7 @@ export async function checkoutUser(formData: CheckoutFormValues, cartId: string)
     if(!token) {
         throw new Error("You are not authorized to do this action")
     }
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/orders/checkout-session/${cartId}?url=http://localhost:3000`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/orders/checkout-session/${cartId}?url=https://nexora-app-mu.vercel.app/`, {
         method: "POST",
         body: JSON.stringify(formData),
         headers: {
