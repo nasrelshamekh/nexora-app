@@ -5,8 +5,8 @@ export async function middleware(request: NextRequest) {
     const token = await getToken({ req: request })
     const { pathname } = request.nextUrl
 
-    const authPages = pathname == "/login" || pathname == "/register" || pathname == "/forgotpassword" || "/verifycode" || "/resetpassword"
-    const loggedInPages = pathname == "/allorders" || pathname == "/changepassword"
+    const authPages = pathname == "/login" || pathname == "/register" || pathname == "/forgotpassword" || pathname == "/verifycode" || pathname == "/resetpassword"
+    const loggedInPages = pathname == "/allorders" || pathname == "/changepassword" || pathname == "/cart" || pathname == "/wishlist"
 
     if (token && authPages) {
         return NextResponse.redirect(new URL("/", request.url))
@@ -23,5 +23,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/cart", "/brands", "/categories", "/login", "/register", "/allorders", "/changepassword", "/forgotpassword", "/verifycode", "/resetpassword"]
+    matcher: ["/cart", "/brands", "/categories", "/login", "/register", "/allorders", "/changepassword", "/forgotpassword", "/verifycode", "/resetpassword", "/wishlist"]
 }
