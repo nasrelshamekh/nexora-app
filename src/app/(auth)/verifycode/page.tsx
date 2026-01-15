@@ -21,11 +21,6 @@ export default function VerifyCode() {
   const searchParams = useSearchParams()
   const email = searchParams.get("email") // email passed from forgot password page
 
-  if (!email) {
-    router.push("/forgotpassword")
-    return null
-  }
-
 
   const form = useForm<VerifyCodeFormType>({
     resolver: zodResolver(verifyCodeSchema),
@@ -33,13 +28,17 @@ export default function VerifyCode() {
     defaultValues: { resetCode: "" },
   })
 
+  if (!email) {
+    router.push("/forgotpassword")
+    return null
+  }
+
   async function handleVerifyCode(values: VerifyCodeFormType) {
     try {
       const data = await verifyResetCode(values.resetCode)
 
       if (data.status === "Success") {
         toast.success("Code verified successfully!", { position: "top-center" })
-        // Redirect to reset password page and pass email in router state
         router.push(`/resetpassword?email=${encodeURIComponent(email as string)}`)
       } else {
         toast.error(data.message || "Invalid code", { position: "top-center" })
