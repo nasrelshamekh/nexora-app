@@ -4,7 +4,6 @@ import { jwtDecode } from "jwt-decode"
 import { DecodedTokenI } from "@/interfaces/decodedtoken"
 
 export const authOptions: NextAuthOptions = {
-    secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/login"
     },
